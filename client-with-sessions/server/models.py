@@ -19,6 +19,9 @@ class User(db.Model):
 
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password)
+    
+    def __repr__(self):
+        return f"<User {self.username}>"
 
 class Task(db.Model):
     __tablename__ = "tasks"
@@ -27,3 +30,6 @@ class Task(db.Model):
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+
+    def __repr__(self):
+        return f"<Task {self.title}>"
